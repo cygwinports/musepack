@@ -1,0 +1,19 @@
+--- origsrc/libmpc/libmpcdec/CMakeLists.txt	2010-01-19 19:46:47.052258900 -0600
++++ src/libmpc/libmpcdec/CMakeLists.txt	2010-01-19 19:56:07.969341500 -0600
+@@ -18,5 +18,5 @@ endif(SHARED)
+ install(TARGETS mpcdec_static LIBRARY DESTINATION "lib${LIB_SUFFIX}" ARCHIVE DESTINATION "lib${LIB_SUFFIX}")
+ 
+ if(SHARED)
+-  install(TARGETS mpcdec_shared LIBRARY DESTINATION "lib${LIB_SUFFIX}" ARCHIVE DESTINATION "lib${LIB_SUFFIX}")
++  install(TARGETS mpcdec_shared LIBRARY DESTINATION "lib${LIB_SUFFIX}" ARCHIVE DESTINATION "lib${LIB_SUFFIX}" RUNTIME DESTINATION "bin")
+ endif(SHARED)
+--- origsrc/libmpc/mpcenc/mpcenc.h	2010-01-19 19:29:03.000000000 -0600
++++ src/libmpc/mpcenc/mpcenc.h	2010-01-19 19:50:51.607246600 -0600
+@@ -43,6 +43,7 @@
+ # include <windows.h>
+ #elif defined __unix__  ||  defined __linux__  ||  defined __APPLE__
+ # include <unistd.h>
++# include <fcntl.h>
+ # include <locale.h>
+ # include <langinfo.h>
+ #else
