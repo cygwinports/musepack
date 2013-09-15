@@ -1,0 +1,28 @@
+inherit cmake
+
+NAME="musepack"
+VERSION=475
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="Musepack SV8 audio codec"
+DESCRIPTION="Musepack is an audio compression format with a strong emphasis
+on high quality. It's not lossless, but it is designed for transparency, so
+that you won't be able to hear differences between the original wave file
+and the much smaller MPC file."
+HOMEPAGE="http://www.musepack.net/"
+SRC_URI="http://files.musepack.net/source/musepack_src_r${VERSION}.tar.gz"
+SRC_DIR="musepack_src_r${VERSION}"
+PATCH_URI="
+	453-build-cygwin.patch
+	475-cflags.patch
+	475-cmake-install.patch
+"
+
+PKG_NAMES="${NAME} libmpcdec7 libmpcdec-devel"
+musepack_CATEGORY="Audio"
+musepack_SUMMARY="${SUMMARY} tools"
+musepack_CONTENTS="usr/bin/*.exe" # usr/share/doc/"
+libmpcdec7_CONTENTS="usr/bin/cygmpcdec-7.dll"
+libmpcdec_devel_CONTENTS="usr/include/ usr/lib/"
+
+CYGCMAKE_ARGS="-DSHARED=ON"

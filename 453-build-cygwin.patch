@@ -1,12 +1,3 @@
---- origsrc/libmpc/libmpcdec/CMakeLists.txt	2010-01-19 19:46:47.052258900 -0600
-+++ src/libmpc/libmpcdec/CMakeLists.txt	2010-01-19 19:56:07.969341500 -0600
-@@ -18,5 +18,5 @@ endif(SHARED)
- install(TARGETS mpcdec_static LIBRARY DESTINATION "lib${LIB_SUFFIX}" ARCHIVE DESTINATION "lib${LIB_SUFFIX}")
- 
- if(SHARED)
--  install(TARGETS mpcdec_shared LIBRARY DESTINATION "lib${LIB_SUFFIX}" ARCHIVE DESTINATION "lib${LIB_SUFFIX}")
-+  install(TARGETS mpcdec_shared LIBRARY DESTINATION "lib${LIB_SUFFIX}" ARCHIVE DESTINATION "lib${LIB_SUFFIX}" RUNTIME DESTINATION "bin")
- endif(SHARED)
 --- origsrc/libmpc/mpcenc/mpcenc.h	2010-01-19 19:29:03.000000000 -0600
 +++ src/libmpc/mpcenc/mpcenc.h	2010-01-19 19:50:51.607246600 -0600
 @@ -43,6 +43,7 @@
@@ -17,3 +8,15 @@
  # include <locale.h>
  # include <langinfo.h>
  #else
+@@ -128,10 +129,7 @@
+ #elif defined __TURBOC__ || defined __BORLANDC__
+ # define SETBINARY_IN(__fp)     (setmode   ( FILENO ((__fp)),  O_BINARY ), (__fp))
+ # define SETBINARY_OUT(__fp)    (setmode   ( FILENO ((__fp)),  O_BINARY ), (__fp))
+-#elif defined __CYGWIN__
+-# define SETBINARY_IN(__fp)     (setmode   ( FILENO ((__fp)), _O_BINARY ), (__fp))
+-# define SETBINARY_OUT(__fp)    (setmode   ( FILENO ((__fp)), _O_BINARY ), (__fp))
+-#elif defined _WIN32
++#elif defined _WIN32 || defined __CYGWIN__
+ # define SETBINARY_IN(__fp)     (_setmode  ( FILENO ((__fp)), _O_BINARY ), (__fp))
+ # define SETBINARY_OUT(__fp)    (_setmode  ( FILENO ((__fp)), _O_BINARY ), (__fp))
+ #elif defined _MSC_VER
